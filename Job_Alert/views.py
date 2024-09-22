@@ -4,8 +4,8 @@ from .forms import ProfileForm
 from django.contrib.auth.decorators import login_required
 from .models import *
 from django.contrib.auth.models import User
+from fuzzywuzzy import fuzz 
 
-from django.contrib.auth.models import User
 # Create your views here.
 
 
@@ -33,6 +33,11 @@ class home(View):
                  return redirect('compulsary-profile')
             else:
                  profile = Profile.objects.get(user=request.user)
+                 job = 'Python/Django Developer (Frontend)'
+                 profile = 'Django/python developer '
+                 similarity_score = fuzz.partial_ratio(job.lower(), profile.lower())
+                 print("simalirity_score: ",similarity_score)
+
                  return render(request, "Job_Alert/home.html", {"profile": profile})
             
 
