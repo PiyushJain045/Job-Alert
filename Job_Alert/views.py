@@ -29,6 +29,7 @@ class home(View):
             current_user = request.user
             profile = Profile.objects.get(user=current_user)
             print(profile.is_complete)
+            print(profile.avatar)
             if profile.is_complete == False:
                  return redirect('compulsary-profile')
             else:
@@ -45,6 +46,7 @@ class my_profile(View):
      def get(self, request):
         current_user = request.user
         profile = Profile.objects.get(user=current_user)
+        print(profile.avatar)
         return render(request, "Job_Alert/profile.html", {'profile': profile})
      
      def post(self, request):
