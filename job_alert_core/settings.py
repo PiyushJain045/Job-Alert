@@ -130,12 +130,26 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# images and files store settings
 MEDIA_URL = "/files/"
 MEDIA_ROOT = BASE_DIR / "uploads"
 
+
+# all auth settings
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
+#email settings
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 ACCOUNT_AUTHENTICATION_METHOD = 'email' 
 ACCOUNT_EMAIL_REQUIRED = True
+
+#CELERY SETTINGS
+
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379'  # Redis as the broker
+CELERY_ACCEPT_CONTENT = ['json'] # results will be stored on our database
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = "Asia/Kolkata"
+
