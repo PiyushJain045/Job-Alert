@@ -20,6 +20,7 @@ def user_postsave(sender, instance, created, **kwargs):
 
 @receiver(post_save, sender=Job)
 def job_post_save(sender, instance, created, **kwargs):
+    print("signal invloked")
     if created:  # Check if a new job was created
-        check_job_match_and_notify_users.delay(instance.id)  # Call Celery task
+        check_job_match_and_notify_users.apply_async(args=[instance.id])  # Call Celery task
 

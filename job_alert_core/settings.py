@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'Job_Alert',
-    'django_cleanup.apps.CleanupConfig'
+    'django_cleanup.apps.CleanupConfig',
+    'django_celery_results'
 ]
 
 MIDDLEWARE = [
@@ -139,17 +140,24 @@ MEDIA_ROOT = BASE_DIR / "uploads"
 # all auth settings
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
-
-#email settings
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 ACCOUNT_AUTHENTICATION_METHOD = 'email' 
 ACCOUNT_EMAIL_REQUIRED = True
 
 #CELERY SETTINGS
-
 CELERY_BROKER_URL = 'redis://127.0.0.1:6379'  # Redis as the broker
-CELERY_ACCEPT_CONTENT = ['json'] # results will be stored on our database
+CELERY_ACCEPT_CONTENT = ['application/json'] # results will be stored on our database
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = "Asia/Kolkata"
 
+CELERY_RESULT_BACKEND = 'django-db'
+
+#Django email sending
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'lightningiit123@gmail.com'
+EMAIL_HOST_PASSWORD = 'rzazzjltlvagyrhp'  # Use environment variables for security
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
