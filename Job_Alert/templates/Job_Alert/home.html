@@ -36,6 +36,29 @@
     </div>
 </nav>
 
+<div>
+    <h1>Jobs recommended for you</h1>
+    {% if Jobs %}
+    <ul class="job-list">
+        {% for job in Jobs %}
+            <li class="job-item">
+                <div class="job-title">{{ job.role }}</div>
+                <div class="job-company">{{ job.company_name }}</div>
+                <div class="job-details">
+                    <p><strong>Location:</strong> {{ job.location }}</p>
+                    <p><strong>Type:</strong> {{ job.get_job_type_display }}</p>
+                </div>
+                <a href="{{ job.link_to_original_source }}" class="job-link" target="_blank">
+                    View Job Posting
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No matched jobs found based on your preferences.</p>
+{% endif %}
+</div>
+
 
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

@@ -34,12 +34,30 @@ class home(View):
                  return redirect('compulsary-profile')
             else:
                  profile = Profile.objects.get(user=request.user)
-                 job = 'Python/Django Developer (Frontend)'
-                 profile = 'Django/python developer '
-                 similarity_score = fuzz.partial_ratio(job.lower(), profile.lower())
-                 print("simalirity_score: ",similarity_score)
+                 if profile.preferred_job_location.lower() == "all india":
+                    filtered_jobs = Job.objects.filter(job_type=profile.preferred_job_type)
+                 else:
+                    filtered_jobs = Job.objects.filter(
+                    job_type=profile.preferred_job_type,
+                    location__icontains=profile.preferred_job_location
+                )
+                 print("Step 1:", filtered_jobs)
 
-                 return render(request, "Job_Alert/home.html", {"profile": profile})
+                 matched_jobs = []
+                 for job in filtered_jobs:
+                    print(profile.preferred_job_title.lower())
+                    print(job.role.lower())
+                    match_score = fuzz.partial_ratio(profile.preferred_job_title.lower(), job.role.lower())
+                    print(match_score)
+                    if match_score > 60:  
+                        matched_jobs.append(job)
+                    print(matched_jobs)
+
+                 return render(request, "Job_Alert/home.html", {"profile": profile,
+                                                                "Jobs": matched_jobs})
+
+
+            # return render(request, "Job_Alert/home.html", {"profile": profile})
             
 
 class my_profile(View):

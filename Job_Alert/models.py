@@ -28,12 +28,22 @@ class Profile(models.Model):
         ('remote', 'Remote'),
     ]
 
+    JOB_TITLE_CHOICES = [
+        ('django/python developer', 'Django/Python Developer'),
+        ('ui ux designer', 'UI UX Designer'),
+        ('project manager', 'Project Manager'),
+        ('full stack web developer', 'Full Stack Web Developer'),
+        ('mern stack developer', 'MERN Stack Developer'),
+        ('artificial intelligence(ai) and machine learning(ml) engineer', 'AI/ML Engineer'),
+        ('data scientist/analyst', 'Data Scientist/Analyst'),
+    ]
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100, null=True, blank=True)
     image = models.ImageField(upload_to="Profile_photos", null=True, blank=True)
     age = models.IntegerField(blank=True, null=True)
     phone_number = models.CharField(max_length=15)
-    preferred_job_title = models.CharField(max_length=100)
+    preferred_job_title = models.CharField(max_length=100, choices=JOB_TITLE_CHOICES)
     preferred_job_type = models.CharField(max_length=10, choices=JOB_TYPE_CHOICES)
     preferred_job_location = models.CharField(max_length=100)
     is_complete = models.BooleanField(default=False) 
