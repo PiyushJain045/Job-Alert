@@ -40,7 +40,8 @@ INSTALLED_APPS = [
 
     'Job_Alert',
     'django_cleanup.apps.CleanupConfig',
-    'django_celery_results'
+    'django_celery_results',
+    'django_celery_beat'
 ]
 
 MIDDLEWARE = [
@@ -152,6 +153,9 @@ CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = "Asia/Kolkata"
 
 CELERY_RESULT_BACKEND = 'django-db'
+
+##CELERY BEAT
+CELERY_RESULT_SCHEDULER = 'django_celery_beat.scheduler:DatabaseScheduler'
 
 #Django email sending
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

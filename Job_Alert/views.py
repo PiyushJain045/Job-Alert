@@ -73,4 +73,24 @@ class my_profile(View):
 
 class edit_profile(View):
         def get(self, request):
-            return render(request, "Job_Alert/edit_profile.html")
+            print("Inside edit profile")
+            return render(request, "Job_Alert/partials/edit_p.html")
+        
+        def post(self, request):
+            print("Inside Post")
+
+        # Fetch the logged-in user's profile
+            profile = request.user.profile
+        
+        # Update profile fields with form data
+            profile.name = request.POST.get('displayname')
+            profile.phone_number = request.POST.get('phone_number')
+            profile.age = request.POST.get('age')
+            profile.preferred_job_title = request.POST.get('preferred_job_title')
+            profile.preferred_job_type = request.POST.get('preferred_job_type')
+            profile.preferred_job_location = request.POST.get('preferred_job_location')
+
+            # Save the updated profile
+            profile.save()
+
+            return redirect('my-profile')

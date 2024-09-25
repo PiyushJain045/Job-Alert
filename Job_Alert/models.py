@@ -13,8 +13,8 @@ class Job(models.Model):
 
     role = models.CharField(max_length=100)
     company_name = models.CharField(max_length=100)
-    location = models.CharField(max_length=100)
-    link_to_original_source = models.URLField()
+    location = models.CharField(max_length=100, default='india')
+    link_to_original_source = models.URLField(unique=True)
     job_type = models.CharField(max_length=10, choices=JOB_TYPE_CHOICES)
 
     def __str__(self):
