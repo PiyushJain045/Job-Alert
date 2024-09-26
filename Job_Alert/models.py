@@ -11,7 +11,7 @@ class Job(models.Model):
         ('remote', 'Remote'),
     ]
 
-    role = models.CharField(max_length=100)
+    role = models.CharField(max_length=400)
     company_name = models.CharField(max_length=100)
     location = models.CharField(max_length=100, default='india')
     link_to_original_source = models.URLField(unique=True)
@@ -63,3 +63,4 @@ class Profile(models.Model):
             return self.image.url
         return f'{settings.STATIC_URL}images/avatar.svg' 
         # return static('images/avatar.svg')
+        

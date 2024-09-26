@@ -1,15 +1,14 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from .forms import ProfileForm
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import *
 from django.contrib.auth.models import User
 from fuzzywuzzy import fuzz 
 
 # Create your views here.
 
-
-class compulsary_profile(View):
+class compulsary_profile(LoginRequiredMixin, View):
     def get(self, request):
         form = ProfileForm()
         return render(request, "Job_Alert/compulsary_profile.html", {'form': form})
@@ -26,6 +25,9 @@ class compulsary_profile(View):
 
 class home(View):
     def get(self, request):
+            if request.user.is_authenticated == False:
+                return redirect('account_login')            
+
             current_user = request.user
             profile = Profile.objects.get(user=current_user)
             print(profile.is_complete)
@@ -60,7 +62,7 @@ class home(View):
             # return render(request, "Job_Alert/home.html", {"profile": profile})
             
 
-class my_profile(View):
+class my_profile(LoginRequiredMixin, View):
      def get(self, request):
         current_user = request.user
         profile = Profile.objects.get(user=current_user)
@@ -94,3 +96,4 @@ class edit_profile(View):
             profile.save()
 
             return redirect('my-profile')
+        

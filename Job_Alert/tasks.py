@@ -21,22 +21,19 @@ def check_job_match_and_notify_users(self, job_id):
         profiles = Profile.objects.filter(
             preferred_job_type=job.job_type
         )
-        print("Profile:", Profile)
 
         matched_profiles = []
         for profile in profiles:
-            print("Inside loop")
+            print(f"Job name({job_id}): {job.role.lower()}")
             if profile.preferred_job_location.lower() == "all india" or profile.preferred_job_location.lower() in job.location.lower() or job.location.lower() == 'india':
                 match_score = fuzz.partial_ratio(profile.preferred_job_title.lower(), job.role.lower())
                 print("match score:", match_score)
                 if match_score > 60:
                     matched_profiles.append(profile)
-        print("matched_profile:", matched_profiles)
 
         # Notify matched profiles
         for profile in matched_profiles:
             print("Insode mail loop")
-            print("Profile:",profile)
             print(profile.user.email)
             send_mail(
                 subject='New Job Matching Your Preferences!',

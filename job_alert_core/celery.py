@@ -18,7 +18,7 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 
 #Celery Beat Settings
 app.conf.beat_schedule  = {
-    'scrap-jobs-every-5-seconds': {
+    'scrap-jobs-every-5-minutes': {
         'task': 'Job_Alert.tasks.scrape_jobs',
         'schedule': schedule(300),
         #'args': (2,) pass any arguments
@@ -31,5 +31,5 @@ app.autodiscover_tasks()
 
 @app.task(bind=True)
 def debug_task(self):
-    print(f'Request: {self.request!r}')
+    print(f'Request: {self.request!r}') 
  

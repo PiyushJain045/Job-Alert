@@ -41,7 +41,11 @@ INSTALLED_APPS = [
     'Job_Alert',
     'django_cleanup.apps.CleanupConfig',
     'django_celery_results',
-    'django_celery_beat'
+    'django_celery_beat',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +56,14 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "allauth.account.middleware.AccountMiddleware", 
+]
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by email
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 ROOT_URLCONF = 'job_alert_core.urls'
@@ -138,6 +150,8 @@ MEDIA_URL = "/files/"
 MEDIA_ROOT = BASE_DIR / "uploads"
 
 
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # all auth settings
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
@@ -158,7 +172,7 @@ CELERY_RESULT_BACKEND = 'django-db'
 CELERY_RESULT_SCHEDULER = 'django_celery_beat.scheduler:DatabaseScheduler'
 
 #Django email sending
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
