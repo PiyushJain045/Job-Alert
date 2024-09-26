@@ -163,5 +163,5 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'lightningiit123@gmail.com'
-EMAIL_HOST_PASSWORD = 'rzazzjltlvagyrhp'  # Use environment variables for security
+EMAIL_HOST_PASSWORD = 'ocqmxulebyrkzhcm'  # Use environment variables for security
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

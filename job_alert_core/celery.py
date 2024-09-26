@@ -20,7 +20,7 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 app.conf.beat_schedule  = {
     'scrap-jobs-every-5-seconds': {
         'task': 'Job_Alert.tasks.scrape_jobs',
-        'schedule': schedule(20),
+        'schedule': schedule(300),
         #'args': (2,) pass any arguments
     }
 }
