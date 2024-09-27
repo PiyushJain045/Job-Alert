@@ -23,6 +23,7 @@ class compulsary_profile(LoginRequiredMixin, View):
         return render(request, "Job_Alert/compulsary_profile.html", {'form': form}) 
     
 
+
 class home(View):
     def get(self, request):
             if request.user.is_authenticated == False:
@@ -58,8 +59,6 @@ class home(View):
                  return render(request, "Job_Alert/home.html", {"profile": profile,
                                                                 "Jobs": matched_jobs})
 
-
-            # return render(request, "Job_Alert/home.html", {"profile": profile})
             
 
 class my_profile(LoginRequiredMixin, View):
@@ -68,12 +67,10 @@ class my_profile(LoginRequiredMixin, View):
         profile = Profile.objects.get(user=current_user)
         print(profile.avatar)
         return render(request, "Job_Alert/profile.html", {'profile': profile})
-     
-     def post(self, request):
-          pass
-     
 
-class edit_profile(View):
+
+
+class edit_profile(LoginRequiredMixin, View):
         def get(self, request):
             print("Inside edit profile")
             return render(request, "Job_Alert/partials/edit_p.html")

@@ -30,7 +30,8 @@ class ProfileForm(ModelForm):
                 'placeholder': 'Enter your phone number', 
                 'class': 'form-control'
             }),
-            'preferred_job_title': forms.Select(attrs={                  'class': 'form-control'
+            'preferred_job_title': forms.Select(attrs={             
+                'class': 'form-control'
             }),
             'preferred_job_type': forms.Select(attrs={
                 'class': 'form-control'
