@@ -16,14 +16,14 @@ Make sure the following are installed on your machine:
 - [Redis](https://redis.io/) (for task queuing with Celery)
 
 ## Installation 
-Open the folder in your preferred IDE and run the following 6 command in 5 seprate terminals
-Note: **it is preferred to creta a virtual environment first**
-1) pip install -r requirements.txt (Install dependencies) 
-2.0) python manage.py migrate (Update your settings.py with the PostgreSQL credentials, then run)
-2.1) python manage.py runserver (Run the Django development server)
-3)redis-server (Start Redis Server:)
-4)celery -A job_alert_core worker --pool=solo -l info (Run Celery Worker)
-5)celery -A job_alert_core beat -l info (Run Celery Beat Scheduler)
+Open the folder in your preferred IDE and run the following 6 command in 4 seprate terminals
+Note: **it is preferred to creta a virtual environment first** <br>
+1.0) pip install -r requirements.txt (Install dependencies) <br>
+1.1) python manage.py migrate (Update your settings.py with the PostgreSQL credentials, then run) <br>
+1.2) python manage.py runserver (Run the Django development server) <br>
+2) redis-server (Start Redis Server) <br>
+3) celery -A job_alert_core worker --pool=solo -l info (Run Celery Worker) <br>
+4) celery -A job_alert_core beat -l info (Run Celery Beat Scheduler) <br>
 
 That's it! Access the web app at the URL provided by the Django development server (usually http://127.0.0.1:8000).
 
